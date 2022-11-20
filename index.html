@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bitácora |Karen Palacio | ML + musica</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <main>
+        <h1>Bitácora de exploración machine learning <=> sonido </h1>  
+        <h2> Introducción </h2>
+        <p> Vengo explorando bastante las posibilidades del estado del arte de modelos de difusión para síntesis sonora y musical.
+        <br> Me encontré con una variedad grande (en comparación con hace 5 años) de modelos y pipelines posibles.
+        <br>   A nivel relacional hay un rango posible de grados de interacción humano-computadora, dejando distintos sabores en la boca y sensaciones en el cuerpo.
+        </p>
+        <h1> Experimentos </h1>
+        <h2> Beg your visit: Introducción de modelos en pipelines de producción </h2>
+        Estos escritos son un intento autoetnográficos de entender los cambios en mi cuerpo y mente al ser atravesados por estos procesos. Pienso estos procesos como un reaching-out, relacionamientos tentaculares bidireccionales con la computación.
+            <h3> Beg </h3>
+            Beg es parte de otro proyecto que le llamé i believe in fairies.
+            <br>Visit es parte de otro proyecto que lo llamé bright plants.
+            <br><br>
+            Ambos formaban parte de mi producción previa. Trabajé en estos de la forma en que suelo trabajar con bitwig: intento pensar en una sensación corporal e intento hacer un arreglo mínimo que yo sienta que capture esa idea original. Supongo que metodológicamente hablando tiene que ver con mi interés en el concepto de maestría. Me interesa mucho en particular la idea de duración mínima, me sirve ponerme esa cota porque me permite iterar rápido. Iteraciones rápidas son mi zona de confort, parte de los sesgos que introduzco a mi producción artística por mi background de programadora industrial.
+
+            <br><br>Bright Plants empezó como proponerme hacer algo más... bright, tal vez tirar para lo orgánico. 
+            <br><br> Primera iteración:
+            <audio id='bright_plants.wav' src='bright_plants.wav' style='width: 100%;' controls></audio>
+            Inmediatamente cambié el rumbo, porque siempre me llama la atención lo más grave. incorporé dos samples; un sonido stock de risas de público y uno que dice "For more information please visit". Suelo armar experimentos sonoros cuando me siento sola y este no era una esxepción. Me gusta escuchar la reacción del software, pensar y escuchar algo del otro lado me hace entrar en un loop muy reconfortante.
+
+            <audio id='Master1_bright.wav' src='Master1_bright.wav' style='width: 100%;' controls></audio>
+
+            No estoy muy conforme con el resultado entero de por sí. Me parece interesante como una entrada a una bitácora personal, de un momento de mi vida y como punto de partida. Hice muchas variaciones y versiones de este mismo tema, y la versión instrumental es la que actualmente me gusta más a nivel pieza entera. Más allá de eso, creo que esta es la que me genera una reacción más fuerte. Así que decidí samplearla.
+
+            <br><br><code> ffmpeg -ss 30 -t 7 -i Master1.wav visit.wav</code>
+
+            Extraje la parte que más me interesó de esta semilla.
+            <audio id='visit.wav' src='visit.wav' style='width: 100%;' controls></audio>
+            <h3> Visit </h3>
+            I believe in fairies era otro experimento en donde intenté ir por un sonido más alegre y no me salió.
+            <audio id='Master_fairies.wav' src='Master1_fairies.wav' style='width: 100%;' controls></audio>
+            No tengo tantas versiones de este mismo tema, pero me gustó la introducción, así que la extraje:
+            <code>ffmpeg -ss 0 -t 7 -i Master.wav beg.wav</code>
+            <audio id='beg.wav' src='beg.wav' style='width: 100%;' controls></audio>
+            La llamé beg por beginning, pero también era un juego de palabras conmigo misma teniendo en cuenta que estoy en un momento de negociación con dios con la vida conmigo misma con la semántica. Supongo que desde hace varios años que pongo al cómputo como árbitro entre dios y mi mente.
+
+
+            <br><br>Si tuviera que escribir en un papel la función semántica que relaciona mi lenguaje y mis reglas de producción con el "mundo exterior" , el cuerpo de la función se vería como una pieza de metaprogramación de varios niveles. Cuando ingreso el cómputo del cómputo siempre es más fácil construir deseo, sentirme en casa. Si puedo pensar que 1+1 no es 2, sino que <code>1+1::Int->Int</code> mientras que <code>2::Int</code>. Y que le pese a quien le pese.
+
+            <br><br> Dentro de mi lenguaje, la parte de análisis semántico es otro compilador. Un compilador de compiladores.
+
+            <br> Otra forma de decir lo mismo sería, necesito entender cómo funciona el sentido. Es para mí una necesidad de vida o muerte. Es una duda existencial.
+
+            <br> Volviendo a mi otro lenguaje, ahora veo conexiones. Cuando hablaba de bucles de reflexión<->implementación, la reflexión 
+            <h3> Interpolación </h3>
+            Usando el interpolador, empecé a experimentar con hiperparámetros para entender más el modelo.
+            Hay múltiples hiperparámetros para jugar, pero yo destaco tres.
+            <br> Tres grandes hiperparámetros:
+            <code>
+            <br>#Total number of steps (100 is a good start, can go lower for more speed/less quality)
+            <br>#n_interps Number of interpolated samples
+            <br>#sample_length_mult Multiplier on the default sample length from the model, allows for longer audio clips at the expense of VRAM
+            </code>
+            <h4> sample length </h4>
+            El sample length es el parámetro que más impacta el consumo de VRAM. Me interesó entonces encontrar la cota superior: cuándo rompo nabucodonosor jugando con este parámetro? 
+            <br>Fijando el resto de los parámetros, fui moviendo el Sample Length multiplier:
+            <br><br>   <code>
+                    #@markdown Multiplier on the default sample length from the model, allows for longer audio clips at the expense of VRAM
+                    <br>sample_length_mult = 3#@param {type:"number"}
+
+                </code>
+                <br><br>
+            Length mínima 1: momentos de silencio ruidoso seguidas por risas que van creciendo e iterando. intenta reconstruir el "please visit" por debajo de la risa pero no puede. Duración 38 seg
+            <audio id='inter_50steps_12inter_1leng.wav' src='inter_50steps_12inter_1leng.wav' style='width: 100%;' controls></audio>
+            Length 2: Mucho menos ruido, detalles que suenan por lo bajo, casi como bongoes permiten una escucha más cercana. Tiran a un sonido nu age. Me gusta que siento que me invita a escuchar con atención y de cerca. Intenta reconstruir el "please visit" y le termina saliendo. Va balbuceando hasta llegar. Duración 1:16 minutos.
+            <audio id='inter_50steps_12inter_2leng.wav' src='inter_50steps_12inter_2leng.wav' style='width: 100%;' controls></audio>
+            Length 3: Se intercalan momentos de silencio total que me atraen. Mucho más violento/tosco que el anterior, en donde el modelo prefirió algo más sutil. Esta pieza necesita escucha lejana. La risa se incorpora como un ruido de fondo totalmente transformada, creo que sin el dato del sample original sería dificil reconocerla como risas. El entrecortamiento con el silencio total es una constante en toda la pieza. Duración 1:54 minutos.
+            <audio id='inter_50steps_12inter_3leng.wav' src='inter_50steps_12inter_3leng.wav' style='width: 100%;' controls></audio>
+            <p style="background:red">Length 4: 
+            <br>
+            <img id='inter_50steps_12inter_4leng.wav' src='memory2.png' style='width: 50%;' ></img>
+            </p>
+            Error. No más memoria. Más adelante voy a probar si cambiando cuál GPU de la nabu puedo estirar más este parámetro.
+            Como conclusión, veo que el sample length está bueno que esté acorde a la estructura de lo que se quiere generar. Si se le dan como samples loops chiquititos, o un loop y un arreglo, sería capaz de generar una canción convencionalmente hablando. Si no se busca esto, el sample length puede generar la sensación de entrecortamiento, choppiness. 
+            <h4> steps </h4>
+            Conociendo hasta dónde podía estirar a la nabu por ahora, puedo hacer que trabaje más con un sample length que a mí me interese: el 2.
+
+            <br> Puedo hacer 80 steps, con 12 interpolated samples, con sample length 2?
+            <audio id='inter_80steps_12inter_2leng.wav' src='inter_50steps_12inter_2leng.wav' style='width: 100%;' controls></audio>
+
+    </main>
+	<!--script src="index.js"></script--!>
+  </body>
+</html>
