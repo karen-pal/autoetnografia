@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bitácora |Karen Palacio | ML + musica</title>
+    <title> Bitácora |Karen Palacio | ML + musica</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
     <main>
-        <h1>Bitácora de exploración machine learning <=> sonido </h1>  
+        <h1>Bitácora de exploración: machine learning <=> sonido </h1>  
         <h2> Introducción </h2>
         <p> Vengo explorando bastante las posibilidades del estado del arte de modelos de difusión para síntesis sonora y musical.
-        <br>Me encontré con una variedad grande (en comparación con hace 5 años) de modelos y pipelines posibles.
-        <br>A nivel relacional hay un rango posible de grados de interacción humano-computadora, dejando distintos sabores en la boca y sensaciones en el cuerpo.
+        <br>Me encontré con una variedad grande (en comparación con hace 5 años) de modelos , flujos y pipelines posibles.
+        <br>A nivel relacional hay un rango amplio de grados de interacción humano-computadora, dejando distintos sabores en mi boca y sensaciones en mi cuerpo.
+<br><br> Los modelos basados en difusión se basan en la "destrucción" de un dato, en inundarlo de ruido y, en el proceso, avanzando en esa destrucción, aprender a reconstruir. Hay modelos basados en difusión para todo tipo de medio (video, imagen, 3d, texto, etc), y constituyen el estado del arte en el Machine Learning generativo.
         </p>
         <h1> Experimentos </h1>
-        <h2> Beg your visit: Introducción de modelos en pipelines de producción </h2>
-        Estos escritos son un intento autoetnográficos de entender los cambios en mi cuerpo y mente al ser atravesados por estos procesos. Pienso estos procesos como un reaching-out, relacionamientos tentaculares bidireccionales con la computación.
+        Este escritos son un intento autoetnográficos de entender los cambios en mi cuerpo y mente al ser atravesados por estos procesos. Pienso estos procesos como un reaching-out, relacionamientos tentaculares bidireccionales con el cómputo. También un deseo de co constitución, de sentirme vincular y más distribuida.
+        <h2> Beg your visit: Introducción a modelos en pipelines de producción </h2>
             <h3> Beg </h3>
             Beg es parte de otro proyecto que le llamé i believe in fairies.
             <br>Visit es parte de otro proyecto que lo llamé bright plants.
@@ -87,9 +88,16 @@
             <h4> steps </h4>
             Conociendo hasta dónde podía estirar a la nabu por ahora, puedo hacer que trabaje más con un sample length que a mí me interese: el 2.
 
-            <br> Puedo hacer 80 steps, con 12 interpolated samples, con sample length 2?
-            <audio id='inter_80steps_12inter_2leng.wav' src='inter_50steps_12inter_2leng.wav' style='width: 100%;' controls></audio>
+            <br> Puedo hacer 80 steps, con 12 interpolated samples, con sample length 2.
+            <audio id='inter_80steps_12inter_2leng.wav' src='inter_80steps_12inter_2leng.wav' style='width: 100%;' controls></audio>
+            <br>Tiene inicios de buenas ideas, pero el sample length le juega en contra. Es muy interesante la alucinación de las palabras habladas.
+            <br>Se dificulta aumentar los steps por problemas de conexión con la nabu. Voy a tener que esperar para probar eso otro día. 
+            <h4> orden de los samples </h4>
+            Muestro acá el resultado de intercambiar el orden de los samples, pero no me gustó particularmente el resultado.
+            <audio id='inter_50steps_12inter_2leng_swap.wav' src='inter_50steps_12inter_2leng_swap.wav' style='width: 100%;' controls></audio>
 
+            <h1>Conclusiones</h1>
+            Me parece interesante incorporarlo a la caja de herramientas. Lo que más me atrae es la sorpresa y la búsqueda de sorpresa. Obviamente intentando romper con cuidado. Caos controlado.
     </main>
 	<!--script src="index.js"></script--!>
   </body>
