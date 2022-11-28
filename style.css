@@ -7,4 +7,18 @@ html {
 background: linear-gradient(180deg, rgba(217,213,176,1) 0%, rgba(237,186,119,1) 100%);
 background: rgb(240,230,149);
 background: linear-gradient(180deg, rgba(240,230,149,1) 0%, rgba(163,117,84,1) 100%);
+  margin-right: 350px;
+}
+
+h1 {
+    font-size:10vh;
+background: linear-gradient(90deg, rgba(217,213,276,1) 0%, rgba(250,186,119,1) 100%);
+}
+
+#sun {
+
+    position:absolute;
+    right:0%;
+    height:150%;
+    z-index:0;
 }
